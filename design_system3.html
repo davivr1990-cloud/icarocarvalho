@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - High Performance Physiotherapy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            surface: '#111111',
+                            surfaceHover: '#1c1c1c',
+                            primary: '#0ea6cb', /* Professional Blue */
+                            primaryNeon: '#00e5ff', /* High Energy Cyan */
+                            accent: '#ff5e00', /* Action Orange */
+                            highlight: '#f7ec12', /* Alert Yellow */
+                            muted: '#888888',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scrollbar customizado - Referência 2 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea6cb; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e5ff; 
+        }
+
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            font-family: 'Montserrat', sans-serif;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 94, 0, 0.05), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Glassmorphism - Referência 1 & 3 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Botões */
+        .btn-neon {
+            background: linear-gradient(135deg, #0ea6cb, #00e5ff);
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+        .btn-neon:hover {
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, #ff5e00, #ff8c00);
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 0 15px rgba(255, 94, 0, 0.4);
+        }
+        .btn-accent:hover {
+            box-shadow: 0 0 25px rgba(255, 94, 0, 0.7);
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid #00e5ff;
+            color: #00e5ff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .btn-outline:hover {
+            background: rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        /* Textos */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .text-gradient-primary {
+            background: linear-gradient(to right, #ffffff, #00e5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-accent {
+            background: linear-gradient(to right, #ff5e00, #f7ec12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Forms */
+        .input-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .input-dark:focus {
+            outline: none;
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Efeitos Extras */
+        .border-neon {
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .border-neon:hover {
+            border-color: #00e5ff;
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+        }
+
+        .tag-accent {
+            background: rgba(255, 94, 0, 0.15);
+            color: #ff8c00;
+            border: 1px solid rgba(255, 94, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4 sm:px-8 lg:px-16 overflow-x-hidden">
+
+    <div class="max-w-7xl mx-auto space-y-24">
+        
+        <!-- Header -->
+        <div class="text-center space-y-4">
+            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight uppercase">
+                <span class="text-gradient-primary">Design System</span>
+            </h1>
+            <p class="text-xl text-brand-muted max-w-2xl mx-auto">
+                Uma síntese focada em alta performance, unindo estética de academias de combate, tecnologia moderna e a confiança tátil da fisioterapia profissional.
+            </p>
+        </div>
+
+        <!-- 1. Colors -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold border-b border-white/10 pb-4 inline-block">01. Colors</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Dark -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-dark border border-white/5"></div>
+                    <div class="bg-brand-surface p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Background</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#050505</p>
+                    </div>
+                </div>
+                <!-- Surface -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-surface border border-white/5"></div>
+                    <div class="bg-brand-surfaceHover p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Surface</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#111111</p>
+                    </div>
+                </div>
+                <!-- Primary -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-primary"></div>
+                    <div class="bg-brand-surface p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Primary Blue</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#0ea6cb</p>
+                    </div>
+                </div>
+                <!-- Primary Neon -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-primaryNeon shadow-[0_0_20px_rgba(0,229,255,0.4)]"></div>
+                    <div class="bg-brand-surface p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Neon Cyan</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#00e5ff</p>
+                    </div>
+                </div>
+                <!-- Accent -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-accent shadow-[0_0_20px_rgba(255,94,0,0.4)]"></div>
+                    <div class="bg-brand-surface p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Action Orange</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#ff5e00</p>
+                    </div>
+                </div>
+                <!-- Highlight -->
+                <div class="flex flex-col">
+                    <div class="h-24 rounded-t-xl bg-brand-highlight"></div>
+                    <div class="bg-brand-surface p-4 rounded-b-xl border border-white/5 border-t-0">
+                        <p class="font-bold text-white text-sm">Alert Yellow</p>
+                        <p class="text-xs text-brand-muted font-mono mt-1">#f7ec12</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold border-b border-white/10 pb-4 inline-block">02. Typography</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white/5 p-8 rounded-2xl border border-white/10">
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-brand-primaryNeon text-sm font-mono mb-2">Heading Font: Outfit</p>
+                        <h1 class="text-5xl font-black text-white uppercase">High Performance.</h1>
+                        <h2 class="text-4xl font-bold text-white mt-2">Recover Faster.</h2>
+                        <h3 class="text-2xl font-semibold text-white mt-2">Clinical Mentorship</h3>
+                        <h4 class="text-xl font-medium text-brand-primaryNeon mt-2">Expert Care</h4>
+                    </div>
+                </div>
+                <div class="space-y-6 flex flex-col justify-center">
+                    <div>
+                        <p class="text-brand-accent text-sm font-mono mb-2">Body Font: Montserrat</p>
+                        <p class="text-base text-gray-300 leading-relaxed">
+                            This is the body text. We use <strong>Montserrat</strong> to maintain readibility while achieving a sleek, modern look. The combination of structural precision from the headings and clean geometry here evokes professionalism and trust necessary for clinical spaces.
+                        </p>
+                        <p class="text-sm text-brand-muted mt-4">
+                            Small body text for secondary information and captions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Components: Buttons & Inputs -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold border-b border-white/10 pb-4 inline-block">03. Actions & Inputs</h2>
+            <div class="flex flex-wrap gap-8 items-end bg-brand-surface p-8 rounded-2xl border border-white/5">
+                <div class="space-y-4">
+                    <p class="text-sm font-mono text-brand-muted">Primary Button</p>
+                    <button class="btn-neon px-8 py-4 rounded-lg">Agendar Consulta</button>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm font-mono text-brand-muted">Accent Button</p>
+                    <button class="btn-accent px-8 py-4 rounded-lg">Conheça o Programa</button>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm font-mono text-brand-muted">Outline Button</p>
+                    <button class="btn-outline px-8 py-4 rounded-lg">Saiba Mais</button>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm font-mono text-brand-muted">Text Link</p>
+                    <a href="#" class="text-white font-semibold uppercase tracking-wider text-sm border-neon inline-block pb-1">Ver Serviços</a>
+                </div>
+                <div class="space-y-4 w-full md:w-auto flex-1 max-w-sm">
+                    <p class="text-sm font-mono text-brand-muted">Input Field</p>
+                    <input type="text" placeholder="Seu nome completo" class="input-dark w-full px-5 py-4 rounded-lg text-sm">
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Components: Cards -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-bold border-b border-white/10 pb-4 inline-block">04. Structural Cards</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Service Card -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-primaryNeon/10 rounded-full blur-3xl -mr-10 -mt-10 transition-all duration-500 group-hover:bg-brand-primaryNeon/20"></div>
+                    <div class="w-14 h-14 rounded-xl bg-brand-surface border border-white/10 flex items-center justify-center mb-6 shadow-lg z-10 group-hover:border-brand-primaryNeon/50 transition-colors">
+                        <svg class="w-8 h-8 text-brand-primaryNeon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 z-10">Sports Rehab</h3>
+                    <p class="text-brand-muted text-sm leading-relaxed mb-8 flex-1 z-10">
+                        Detailed assessment and specialized manual therapy to recover injuries and optimize movement mechanics for peak performance.
+                    </p>
+                    <a href="#" class="text-brand-primaryNeon font-semibold text-sm uppercase tracking-wide flex items-center gap-2 z-10 hover:text-white transition-colors w-max">
+                        Discover More
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Package/Pricing Card -->
+                <div class="bg-brand-surface rounded-2xl p-8 flex flex-col border border-white/5 hover:border-brand-accent/30 transition-all duration-300 relative group">
+                    <div class="absolute top-4 right-4 tag-accent px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                        Best Deal
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Performance Monthly</h3>
+                    <div class="h-1 w-12 bg-brand-accent mb-6 rounded-full group-hover:w-full transition-all duration-500"></div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-white">R$450</span>
+                        <span class="text-brand-muted text-sm">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 flex-1 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-brand-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            2 Sessions of Physiotherapy
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-brand-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Full Biomechanical Analysis
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-brand-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Direct WhatsApp Support
+                        </li>
+                    </ul>
+                    <button class="btn-accent w-full py-4 rounded-lg text-sm">Choose Plan</button>
+                </div>
+
+                <!-- Testimonial Card -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col border-t-4 border-t-brand-primaryNeon">
+                    <div class="flex gap-1 mb-6">
+                        <!-- Stars -->
+                        <svg class="w-5 h-5 text-brand-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-highlight" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6 flex-1">
+                        "The level of professionalism and precise treatment is unbelievable. My recovery was much faster than expected to get back to my fights."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-surface border border-white/10 overflow-hidden">
+                            <!-- Placeholder image -->
+                            <div class="w-full h-full bg-gray-700 flex items-center justify-center text-xs font-bold text-white">MK</div>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white text-sm">Marcus K.</p>
+                            <p class="text-xs text-brand-primaryNeon uppercase tracking-wide">Pro MMA Fighter</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Interactive Section Example -->
+        <section class="space-y-8 pb-12">
+            <h2 class="text-3xl font-bold border-b border-white/10 pb-4 inline-block">05. Hero Approach Concept</h2>
+            <div class="relative w-full h-[500px] rounded-3xl overflow-hidden border border-white/10 group">
+                <div class="absolute inset-0 bg-brand-dark">
+                    <!-- Fakes background image -->
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-30 mix-blend-luminosity grayscale"></div>
+                    <!-- Gradients -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+                </div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-center p-10 md:p-16 max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 w-max mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-primaryNeon animate-pulse"></span>
+                        <span class="text-xs font-bold text-white uppercase tracking-wider">Metodologia Exclusiva</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-black text-white uppercase leading-none mb-6">
+                        Supere seus <br>
+                        <span class="text-gradient-accent">Limites.</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-10 max-w-xl">
+                        Fisioterapia avançada para atletas de alta performance. Recupere, fortaleça e eleve seu potencial ao máximo.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="btn-neon px-8 py-4 rounded-lg">Agendar Avaliação</button>
+                        <button class="btn-outline px-8 py-4 rounded-lg flex items-center gap-2">
+                            Assista ao Vídeo
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

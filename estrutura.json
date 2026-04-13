@@ -1,0 +1,128 @@
+{
+  "project": "Redesign Landing Page - Ícaro Navarro",
+  "funnel_strategy": "AIDA (Atenção, Interesse, Desejo, Ação)",
+  "global_assets_reference": "Pasta de assets disponível em: c:\\Users\\user\\OneDrive\\Área de Trabalho\\PROJETOS\\projeto_icaronavarro\\cursoposophospitalar.my.canva.site\\assets (Imagens .jpg, .png e fontes)",
+  "estrutura": [
+    {
+      "section_id": "1_hero",
+      "funnel_stage": "Atenção",
+      "layout": "Hero Section: Grid de 2 colunas. Texto em destaque e Call to Action (CTA) à esquerda. Imagem de autoridade profissional de Ícaro à direita.",
+      "content": {
+        "badge": "Para Profissionais e Estudantes Exigentes",
+        "headline": "Domine a Conduta Clínica com a Biblioteca Premium e Mentoria Especializada",
+        "subheadline": "Acesse centenas de exercícios validados na prática e tenha a oportunidade de discutir os casos reais dos seus pacientes diretamente comigo.",
+        "cta_button_text": "Quero Conhecer as Opções",
+        "cta_action": "Scroll para a seção de preços"
+      },
+      "visuals": "Imagem de Ícaro Navarro em destaque (sugestão: a imagem dele com camisa preta ou de braços cruzados que estava no topo da página original)."
+    },
+    {
+      "section_id": "2_interest_how_it_works",
+      "funnel_stage": "Interesse",
+      "layout": "Seção de Benefícios: Cards lado a lado ou layout alternado explicando a separação entre Biblioteca e Mentoria.",
+      "content": {
+        "section_title": "Como a Biblioteca e a Mentoria vão transformar sua carreira?",
+        "topic_1": {
+          "title": "A Biblioteca Premium",
+          "description": "Tenha na palma da sua mão centenas de exercícios práticos que utilizo diariamente com meus clientes de alta performance. Um guia rápido para consultar quantas vezes precisar."
+        },
+        "topic_2": {
+          "title": "A Mentoria Clínica",
+          "description": "Além do acesso à biblioteca, você poderá trazer casos reais dos seus clientes. Nós vamos, juntos, debater as melhores tomadas de decisão e condutas para entregar resultados superiores."
+        }
+      },
+      "visuals": "Imagens em ação (ex: fotos de treinos/reabilitação e aparelhos presentes na pasta de assets)."
+    },
+    {
+      "section_id": "3_audience",
+      "funnel_stage": "Interesse",
+      "layout": "Lista com ícones visuais acompanhada de foto de alta credibilidade (ex: camisa da seleção brasileira).",
+      "content": {
+        "section_title": "Para quem é este material?",
+        "subtitle": "Especialmente desenhado para quem busca excelência e resultados rápidos:",
+        "target_audience": [
+          "Fisioterapeutas",
+          "Educadores Físicos",
+          "Médicos do Esporte e Ortopedistas",
+          "Estudantes, Graduados e Especialistas"
+        ]
+      },
+      "visuals": "Foto de Ícaro com a camisa do Brasil (CBF) para reforçar a credibilidade esportiva."
+    },
+    {
+      "section_id": "4_about_me",
+      "funnel_stage": "Desejo (Autoridade)",
+      "layout": "Layout de perfil: Foto de impacto ao lado de bullet points ou timeline descrevendo a jornada profissional.",
+      "content": {
+        "section_title": "Quem será o seu mentor?",
+        "intro": "Meu nome é Ícaro Navarro. Sou Especialista em Reabilitação Ortopédica e Esportiva, e atuo há mais de 13 anos na linha de frente com atletas e pacientes ortopédicos.",
+        "credentials": [
+          "Fisioterapeuta com 13 anos de formação",
+          "Especialista em Reabilitação Ortopédica e Esportiva (Santa Casa de SP)",
+          "Aprimoramento em Reabilitação de Joelho e Quadril / Esportiva e Pediátrica (Santa Casa de SP)",
+          "Fisiologia do Exercício (Unifesp)",
+          "Atuação em hospitais de ponta: Albert Einstein, Hospital Infantil Sabará e Santa Casa de SP",
+          "Passagens pelo Santos FC e diversas convocações para a Seleção Brasileira (2015 a 2023)",
+          "Diretor Clínico da ReabIN - Fisioterapia e Performance",
+          "Professor convidado de Pós-Graduação em Ortopedia e Esporte"
+        ]
+      },
+      "visuals": "Mosaico/Grid com imagens atuando em palestras, clínicas e acompanhamento atlético da pasta de assets."
+    },
+    {
+      "section_id": "5_social_proof",
+      "funnel_stage": "Desejo (Prova Social)",
+      "layout": "Grid/Carrossel de imagens com clientes e atletas famosos.",
+      "content": {
+        "section_title": "Quem confia no meu trabalho",
+        "description": "Veja alguns dos atletas e profissionais de alta performance que já passaram pelos meus cuidados."
+      },
+      "visuals": "Grid utilizando as várias fotos com jogadores e celebridades disponíveis na pasta de assets."
+    },
+    {
+      "section_id": "6_offer_pricing",
+      "funnel_stage": "Ação",
+      "layout": "Tabela de Preços (Cards lado a lado). Um card destacando a Biblioteca isolada e um card em grande destaque para o plano Biblioteca + Mentoria.",
+      "content": {
+        "section_title": "Escolha o melhor plano para você",
+        "pricing_options": [
+          {
+            "name": "Biblioteca de Exercícios Premium",
+            "features": [
+              "Acesso vitalício aos exercícios",
+              "Consulta rápida no dia a dia",
+              "Exercícios focados em reabilitação e performance"
+            ],
+            "price": "R$ 96,90",
+            "recurrence": "Pagamento Único"
+          },
+          {
+            "name": "Mentoria Clínica + Biblioteca Premium",
+            "highlight": "Plano Mais Escolhido",
+            "features": [
+              "Tudo da Biblioteca Premium",
+              "Suporte para casos clínicos próprios",
+              "Evolução das condutas lado a lado com um especialista"
+            ],
+            "price": "R$ 69,90",
+            "recurrence": "por mês"
+          }
+        ],
+        "primary_cta": {
+          "button_text": "Quero entrar no grupo VIP do WhatsApp",
+          "urgency_trigger": "Aproveite essas condições por tempo limitado. Clique agora!"
+        }
+      },
+      "visuals": "Ícones de check em verde para os benefícios, botões de ação em cores de contraste (ex: laranja neon ou azul elétrico conforme o design system preestabelecido)."
+    },
+    {
+      "section_id": "7_footer",
+      "funnel_stage": "Fechamento",
+      "layout": "Rodapé simples e limpo.",
+      "content": {
+        "links": ["Condições e Suporte", "Política de Privacidade"],
+        "copyright": "© 2026 Ícaro Navarro. Todos os direitos reservados."
+      }
+    }
+  ]
+}

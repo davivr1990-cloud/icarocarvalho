@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ícaro Navarro - Mentoria e Biblioteca Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        background: '#070b10', // Deep dark night
+                        surface: {
+                            DEFAULT: '#101720',
+                            light: '#1a2430'
+                        },
+                        primary: {
+                            DEFAULT: '#00B4D8', // Electric Blue
+                            hover: '#0096C7',
+                            light: '#48CAE4',
+                            glow: 'rgba(0, 180, 216, 0.5)'
+                        },
+                        accent: {
+                            DEFAULT: '#FF5400', // Neon Orange
+                            hover: '#E04A00',
+                            glow: 'rgba(255, 84, 0, 0.5)'
+                        },
+                        text: {
+                            main: '#f2f5f8',
+                            muted: '#9ba4b5',
+                            dark: '#070b10'
+                        }
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                        'primary-gradient': 'linear-gradient(135deg, #00B4D8 0%, #0077B6 100%)',
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+                        'glow-primary': '0 0 15px rgba(0, 180, 216, 0.6)',
+                        'glow-accent': '0 0 15px rgba(255, 84, 0, 0.6)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070b10;
+            color: #f2f5f8;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-heading {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(26, 36, 48, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Nav Icon */
+        .nav-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            cursor: pointer;
+        }
+        .nav-icon span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: #fff;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .nav-icon span:nth-child(1) { top: 10px; }
+        .nav-icon span:nth-child(2) { top: 20px; }
+        .nav-icon span:nth-child(3) { top: 30px; }
+        
+        .nav-icon.open span:nth-child(1) { top: 20px; transform: rotate(135deg); background-color: #FF5400; }
+        .nav-icon.open span:nth-child(2) { opacity: 0; left: -60px; }
+        .nav-icon.open span:nth-child(3) { top: 20px; transform: rotate(-135deg); background-color: #FF5400;}
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00B4D8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #48CAE4;
+        }
+
+        /* Sections */
+        .ds-section {
+            padding: 6rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ds-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            position: relative;
+            background-color: #00B4D8;
+            color: #070b10;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem 2rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
+            transform: skewX(-10deg);
+        }
+
+        .btn-primary span {
+            display: inline-block;
+            transform: skewX(10deg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-primary:hover {
+            background-color: #48CAE4;
+        }
+
+        .btn-accent {
+            display: inline-block;
+            position: relative;
+            background-color: #FF5400;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem 2rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 84, 0, 0.6);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(255, 84, 0, 0.8);
+        }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-text-dark">
+
+    <!-- Header Navigation -->
+    <div class="fixed top-0 left-0 w-full z-50 glass-panel py-4 px-6 flex justify-between items-center transition-all duration-300">
+        <div class="font-heading font-black text-2xl tracking-tighter uppercase text-white flex items-center">
+            <span class="text-primary mr-2">/</span> Ícaro Navarro
+        </div>
+        <div class="hidden md:flex gap-6 items-center">
+            <a href="#como-funciona" class="text-text-muted hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Metodologia</a>
+            <a href="#sobre" class="text-text-muted hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Mentor</a>
+            <a href="#planos" class="text-text-muted hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Planos</a>
+            <a href="#planos" class="btn-primary py-2 px-6 shadow-none text-sm"><span>Acessar Agora</span></a>
+        </div>
+        <div class="nav-icon md:hidden" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8">
+        <a href="#como-funciona" class="mobile-link text-2xl font-heading font-black uppercase text-white hover:text-primary transition-colors">Metodologia</a>
+        <a href="#sobre" class="mobile-link text-2xl font-heading font-black uppercase text-white hover:text-primary transition-colors">Mentor</a>
+        <a href="#planos" class="mobile-link text-2xl font-heading font-black uppercase text-white hover:text-primary transition-colors">Planos</a>
+    </div>
+
+    <!-- 1. Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 flex items-center min-h-screen overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[150px] -z-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-0 left-10 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px] -z-10 animate-float"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+            <div class="gsap-hero-content order-2 lg:order-1 flex flex-col items-start">
+                <div class="inline-block border border-primary/50 text-primary px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-6 bg-primary/5 backdrop-blur-md">
+                    Para Profissionais e Estudantes Exigentes
+                </div>
+                <h1 class="font-heading font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-6 leading-tight">
+                    Domine a Conduta Clínica com a <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Biblioteca Premium</span> e Mentoria
+                </h1>
+                <p class="text-text-muted text-lg sm:text-xl font-light mb-10 leading-relaxed max-w-xl">
+                    Acesse centenas de exercícios validados na prática e tenha a oportunidade de discutir os casos reais dos seus pacientes diretamente comigo.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#planos" class="btn-primary text-center">
+                        <span>Quero Conhecer as Opções</span>
+                    </a>
+                </div>
+            </div>
+            <div class="gsap-hero-image order-1 lg:order-2 relative flex justify-center mt-12 lg:mt-0">
+                <div class="relative w-full max-w-md">
+                    <!-- Decorator Elements -->
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-primary z-20"></div>
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-accent z-20"></div>
+                    
+                    <div class="glass-panel p-2 rounded-2xl relative z-10 overflow-hidden transform hover:-translate-y-2 transition-transform duration-500">
+                        <!-- Image Path updated to Canva Assets folder reference -->
+                        <img src="cursoposophospitalar.my.canva.site/assets/1fcf5d1d1125b35599a205220600ab_71eb87e8f4bc.png" alt="Ícaro Navarro" class="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-700 object-cover aspect-[4/5] object-top">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Interest / How it works -->
+    <section id="como-funciona" class="ds-section relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto gsap-fade-up">
+                <h2 class="ds-heading text-3xl md:text-5xl">Como a Biblioteca e a Mentoria vão transformar sua carreira?</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Biblioteca Premium -->
+                <div class="glass-panel rounded-3xl p-8 lg:p-12 gsap-fade-up hover:border-primary/50 transition-colors group">
+                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-8 text-primary shadow-glow-primary group-hover:bg-primary group-hover:text-white transition-all">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <img src="cursoposophospitalar.my.canva.site/assets/0dbda29beec7eecccae2d5decce214_6872e287317f.jpg" alt="Biblioteca Prática" class="w-full h-48 object-cover rounded-xl mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
+                    <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase">A Biblioteca Premium</h3>
+                    <p class="text-text-muted text-lg leading-relaxed">
+                        Tenha na palma da sua mão centenas de exercícios práticos que utilizo diariamente com meus clientes de alta performance. Um guia rápido para consultar quantas vezes precisar.
+                    </p>
+                </div>
+
+                <!-- Mentoria Clínica -->
+                <div class="glass-panel rounded-3xl p-8 lg:p-12 gsap-fade-up hover:border-accent/50 transition-colors group" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-accent/20 rounded-xl flex items-center justify-center mb-8 text-accent shadow-glow-accent group-hover:bg-accent group-hover:text-white transition-all">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <img src="cursoposophospitalar.my.canva.site/assets/251fb6babf89ca5dff34e6e3f16cce_486442cce2eb.jpg" alt="Mentoria Clínica" class="w-full h-48 object-cover rounded-xl mb-8 opacity-80 group-hover:opacity-100 transition-opacity filter grayscale group-hover:grayscale-0">
+                    <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase">A Mentoria Clínica</h3>
+                    <p class="text-text-muted text-lg leading-relaxed">
+                        Além do acesso à biblioteca, você poderá trazer casos reais dos seus clientes. Nós vamos, juntos, debater as melhores tomadas de decisão e condutas para entregar resultados superiores.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Target Audience -->
+    <section class="ds-section bg-surface/30 relative">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+            <div class="w-full lg:w-1/2 order-2 lg:order-1 relative gsap-fade-up">
+                <div class="glass-panel p-2 rounded-2xl rounded-tr-[100px] rounded-bl-[100px] overflow-hidden">
+                    <img src="cursoposophospitalar.my.canva.site/assets/ca4fd93e79a43d5a13cde1076c022c_2703252e14d7.jpg" alt="Ícaro Navarro - Credibilidade Esportiva" class="w-full h-auto aspect-square object-cover rounded-xl rounded-tr-[96px] rounded-bl-[96px] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/30 rounded-full blur-[60px] -z-10"></div>
+            </div>
+            <div class="w-full lg:w-1/2 order-1 lg:order-2 gsap-fade-up">
+                <h2 class="ds-heading text-3xl md:text-5xl mb-4">Para quem é este material?</h2>
+                <p class="text-xl text-primary font-medium mb-10">Especialmente desenhado para quem busca excelência e resultados rápidos:</p>
+                
+                <ul class="space-y-6">
+                    <li class="flex items-center gap-4 glass-panel p-4 rounded-xl group hover:border-primary/40 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-surface shadow-inner flex justify-center items-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-xl font-bold uppercase tracking-wide text-white">Fisioterapeutas</span>
+                    </li>
+                    <li class="flex items-center gap-4 glass-panel p-4 rounded-xl group hover:border-primary/40 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-surface shadow-inner flex justify-center items-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-xl font-bold uppercase tracking-wide text-white">Educadores Físicos</span>
+                    </li>
+                    <li class="flex items-center gap-4 glass-panel p-4 rounded-xl group hover:border-primary/40 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-surface shadow-inner flex justify-center items-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-xl font-bold uppercase tracking-wide text-white">Médicos do Esporte e Ortopedistas</span>
+                    </li>
+                    <li class="flex items-center gap-4 glass-panel p-4 rounded-xl group hover:border-primary/40 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-surface shadow-inner flex justify-center items-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-xl font-bold uppercase tracking-wide text-white">Estudantes, Graduados e Especialistas</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. About Mentor -->
+    <section id="sobre" class="ds-section relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('cursoposophospitalar.my.canva.site/assets/0b81e31c66ca86c8ab93b3717557ef_267acdb93277.jpg')] bg-cover bg-center opacity-[0.03] -z-20 mix-blend-screen"></div>
+        
+        <div class="max-w-7xl mx-auto flex flex-col xl:flex-row gap-16 items-center">
+            <!-- Mentor Content -->
+            <div class="w-full xl:w-[60%] gsap-fade-up">
+                <div class="inline-block border border-accent/50 text-accent px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-6 bg-accent/5 backdrop-blur-md">
+                    Autoridade Esportiva
+                </div>
+                <h2 class="ds-heading text-4xl md:text-5xl mb-6">Quem será o seu mentor?</h2>
+                
+                <p class="text-xl text-white font-light mb-10 leading-relaxed border-l-4 border-primary pl-6">
+                    Meu nome é Ícaro Navarro. Sou Especialista em Reabilitação Ortopédica e Esportiva, e atuo há mais de 13 anos na linha de frente com atletas e pacientes ortopédicos.
+                </p>
+
+                <div class="glass-panel p-8 rounded-2xl relative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[40px]"></div>
+                    <ul class="space-y-4 text-text-muted relative z-10">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Fisioterapeuta com 13 anos de formação</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Especialista em Reabilitação Ortopédica e Esportiva (Santa Casa de SP)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Aprimoramento em Reabilitação de Joelho e Quadril / Esportiva e Pediátrica</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Fisiologia do Exercício (Unifesp)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Atuação em hospitais de ponta: Albert Einstein, Infantil Sabará e Santa Casa</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-accent mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            <span class="text-white font-medium">Passagens pelo Santos FC e Seleção Brasileira (2015 a 2023)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Diretor Clínico da ReabIN - Fisioterapia e Performance</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Professor convidado de Pós-Graduação em Ortopedia e Esporte</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mentor Visuals Grid -->
+            <div class="w-full xl:w-[40%] grid grid-cols-2 gap-4 gsap-fade-up">
+                <div class="space-y-4">
+                    <img src="cursoposophospitalar.my.canva.site/assets/65a2433238118cd39743fa895ed922_91a99467dcea.jpg" alt="Atendimento" class="w-full h-48 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="cursoposophospitalar.my.canva.site/assets/87e22a62965f141aa08e93699b0b35_5fcf36561800.jpg" alt="Acompanhamento Atlético" class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+                <div class="space-y-4 mt-8">
+                    <img src="cursoposophospitalar.my.canva.site/assets/8a546662621972dd4b0127cbf170c7_22be312b3b70.jpg" alt="Palestra" class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="cursoposophospitalar.my.canva.site/assets/be47a0c9c0a9f0d9b144ff74296129_694f87608dae.jpg" alt="Clínica" class="w-full h-48 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Social Proof -->
+    <section class="ds-section bg-surface/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gsap-fade-up">
+                <h2 class="ds-heading text-3xl md:text-5xl">Quem confia no meu trabalho</h2>
+                <p class="text-text-muted text-lg max-w-2xl mx-auto mt-4">
+                    Veja alguns dos atletas e profissionais de alta performance que já passaram pelos meus cuidados.
+                </p>
+            </div>
+
+            <!-- Mosaico / Carrossel em grid flex -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 gsap-fade-up">
+                <!-- Using generic images as placeholders for social proof -->
+                <div class="aspect-square w-full relative group overflow-hidden rounded-xl bg-surface-light">
+                    <img src="cursoposophospitalar.my.canva.site/assets/b7d04f8fa7097a6f5eeaba40f302db_a87f438ecaf6.jpg" alt="Atleta" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-bold text-sm uppercase">Alta Performance</span>
+                    </div>
+                </div>
+                <div class="aspect-square w-full relative group overflow-hidden rounded-xl bg-surface-light md:-translate-y-4">
+                    <img src="cursoposophospitalar.my.canva.site/assets/cc71942f7bb18414e4c9d3d0bb9c82_a3a70b3e8f08.jpg" alt="Atleta" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-bold text-sm uppercase">Futebol Profissional</span>
+                    </div>
+                </div>
+                <div class="aspect-square w-full relative group overflow-hidden rounded-xl bg-surface-light">
+                    <img src="cursoposophospitalar.my.canva.site/assets/d5e7b408c9d8196bcd154813118f02_6096cdee2409.jpg" alt="Atleta" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-bold text-sm uppercase">Recuperação Rápida</span>
+                    </div>
+                </div>
+                <!-- Repetindo a primeira para completar o grid caso falte imagem de atleta específica -->
+                <div class="aspect-square w-full relative group overflow-hidden rounded-xl bg-surface-light md:-translate-y-4">
+                    <img src="cursoposophospitalar.my.canva.site/assets/0b81e31c66ca86c8ab93b3717557ef_267acdb93277.jpg" alt="Atleta" class="w-full h-full object-cover filter grayscale object-top group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-bold text-sm uppercase">Técnica e Precisão</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Offer Pricing -->
+    <section id="planos" class="ds-section relative py-32">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 gsap-fade-up">
+                <h2 class="ds-heading text-4xl md:text-5xl">Escolha o melhor plano para você</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
+                
+                <!-- Card 1: Biblioteca Isolada -->
+                <div class="glass-panel p-10 rounded-3xl relative gsap-fade-up border border-white/5 hover:border-primary/30 transition-all duration-300">
+                    <h3 class="font-heading font-bold text-2xl text-white mb-2 uppercase">Biblioteca de Exercícios Premium</h3>
+                    <p class="text-text-muted mb-8 text-sm">O arsenal indispensável do profissional moderno.</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-4xl font-heading font-black text-white">R$ 96,90</span>
+                        <span class="text-text-muted text-sm block mt-1">Pagamento Único</span>
+                    </div>
+
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3 text-text-muted">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Acesso vitalício aos exercícios
+                        </li>
+                        <li class="flex items-center gap-3 text-text-muted">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Consulta rápida no dia a dia
+                        </li>
+                        <li class="flex items-center gap-3 text-text-muted">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Exercícios focados em reabilitação e performance
+                        </li>
+                    </ul>
+
+                    <button class="w-full py-4 glass-panel text-white font-bold border border-primary/40 hover:bg-white/10 transition-colors rounded uppercase tracking-wider text-sm">
+                        Comprar Biblioteca Isolada
+                    </button>
+                </div>
+
+                <!-- Card 2: Highlighted (Mentoria + Biblioteca) -->
+                <div class="glass-panel p-10 rounded-3xl relative gsap-fade-up transform lg:scale-105 z-10 border border-accent/50 shadow-glow-accent bg-[#101720]/80 backdrop-blur-2xl">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-accent text-white px-6 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
+                        Plano Mais Escolhido
+                    </div>
+                    
+                    <h3 class="font-heading font-black text-3xl text-white mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-accent mt-4">Mentoria Clínica + Biblioteca</h3>
+                    <p class="text-text-muted mb-8 text-sm">Para quem quer evoluir junto com um especialista.</p>
+                    
+                    <div class="mb-8 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                        <span class="text-5xl font-heading font-black text-white">R$ 69,90</span>
+                        <span class="text-primary font-medium text-lg ml-2">/ mês</span>
+                    </div>
+
+                    <ul class="space-y-5 mb-10">
+                        <li class="flex items-center gap-3 text-white font-medium">
+                            <svg class="w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            Tudo da Biblioteca Premium
+                        </li>
+                        <li class="flex items-center gap-3 text-white font-medium">
+                            <svg class="w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            Suporte para casos clínicos próprios
+                        </li>
+                        <li class="flex items-center gap-3 text-white font-medium">
+                            <svg class="w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            Evolução das condutas lado a lado com um especialista
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-col items-center">
+                        <button class="w-full btn-accent py-5 text-lg flex justify-center items-center gap-2 mb-4">
+                            <!-- WhatsApp Icon SVG -->
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                            Quero entrar no grupo VIP
+                        </button>
+                        <p class="text-xs text-text-muted/80 text-center uppercase tracking-wide">Aproveite essas condições por tempo limitado. Clique agora!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="glass-panel py-8 border-t border-white/10 mt-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-heading font-black text-xl tracking-tighter uppercase text-white flex items-center">
+                <span class="text-primary mr-2">/</span> Ícaro Navarro
+            </div>
+            
+            <div class="flex gap-6 text-sm text-text-muted">
+                <a href="#" class="hover:text-primary transition-colors">Condições e Suporte</a>
+                <a href="#" class="hover:text-primary transition-colors">Política de Privacidade</a>
+            </div>
+
+            <p class="text-sm text-text-muted opacity-60">
+                &copy; 2026 Ícaro Navarro. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-500 ease-out" id="floating-whatsapp">
+        <a href="#planos" class="relative w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform duration-300 group">
+            <span class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-75"></span>
+            <svg class="w-8 h-8 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            
+            <div class="absolute right-[110%] bg-surface-light border border-white/10 text-white text-sm px-4 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-glass hidden md:block font-medium">
+                Falar com a Equipe
+            </div>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                menuToggle.classList.add('open');
+                mobileMenu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuToggle.classList.remove('open');
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // GSAP Animations
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero animations
+            gsap.from(".gsap-hero-content > *", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.2
+            });
+
+            gsap.from(".gsap-hero-image", {
+                x: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.5
+            });
+
+            // Fade Up elements
+            gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+
+            // Floating WhatsApp visibility toggle based on scroll (starts showing after first section)
+            const whatsappBtn = document.getElementById('floating-whatsapp');
+            
+            ScrollTrigger.create({
+                trigger: "#como-funciona", // Show after hero
+                start: "top 50%",
+                onEnter: () => {
+                    whatsappBtn.classList.remove('translate-y-24', 'opacity-0');
+                },
+                onLeaveBack: () => {
+                    whatsappBtn.classList.add('translate-y-24', 'opacity-0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
