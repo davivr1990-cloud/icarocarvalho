@@ -272,27 +272,51 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 <!-- Biblioteca Premium -->
-                <div class="glass-panel rounded-3xl p-8 lg:p-12 gsap-fade-up hover:border-primary/50 transition-colors group">
-                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-8 text-primary shadow-glow-primary group-hover:bg-primary group-hover:text-white transition-all">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <div class="relative rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-all duration-300 group flex flex-col min-h-[500px] gsap-fade-up">
+                    <!-- Background Image -->
+                    <div class="absolute inset-0 z-0">
+                        <img src="cursoposophospitalar.my.canva.site/assets/0dbda29beec7eecccae2d5decce214_6872e287317f.jpg" alt="Biblioteca Prática" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500">
                     </div>
-                    <img src="cursoposophospitalar.my.canva.site/assets/0dbda29beec7eecccae2d5decce214_6872e287317f.jpg" alt="Biblioteca Prática" class="w-full h-48 object-cover rounded-xl mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase">A Biblioteca Premium</h3>
-                    <p class="text-text-muted text-lg leading-relaxed">
-                        Tenha na palma da sua mão centenas de exercícios práticos que utilizo diariamente com meus clientes de alta performance. Um guia rápido para consultar quantas vezes precisar.
-                    </p>
+                    
+                    <!-- Gradient Overlay for Contrast -->
+                    <div class="absolute inset-0 z-0 bg-gradient-to-t from-[#070b10] via-[#070b10]/80 to-transparent"></div>
+
+                    <!-- Content -->
+                    <div class="relative z-10 p-8 lg:p-12 flex flex-col h-full">
+                        <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-auto text-primary shadow-glow-primary group-hover:bg-primary group-hover:text-white transition-all">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <div class="mt-8">
+                            <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase drop-shadow-lg">A Biblioteca Premium</h3>
+                            <p class="text-text-muted text-lg leading-relaxed drop-shadow-md">
+                                Tenha na palma da sua mão centenas de exercícios práticos que utilizo diariamente com meus clientes de alta performance. Um guia rápido para consultar quantas vezes precisar.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Mentoria Clínica -->
-                <div class="glass-panel rounded-3xl p-8 lg:p-12 gsap-fade-up hover:border-accent/50 transition-colors group" style="transition-delay: 100ms;">
-                    <div class="w-16 h-16 bg-accent/20 rounded-xl flex items-center justify-center mb-8 text-accent shadow-glow-accent group-hover:bg-accent group-hover:text-white transition-all">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <div class="relative rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-accent/50 transition-all duration-300 group flex flex-col min-h-[500px] gsap-fade-up" style="transition-delay: 100ms;">
+                    <!-- Background Image -->
+                    <div class="absolute inset-0 z-0">
+                        <img src="cursoposophospitalar.my.canva.site/assets/251fb6babf89ca5dff34e6e3f16cce_486442cce2eb.jpg" alt="Mentoria Clínica" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500 filter grayscale group-hover:grayscale-0">
                     </div>
-                    <img src="cursoposophospitalar.my.canva.site/assets/251fb6babf89ca5dff34e6e3f16cce_486442cce2eb.jpg" alt="Mentoria Clínica" class="w-full h-48 object-cover rounded-xl mb-8 opacity-80 group-hover:opacity-100 transition-opacity filter grayscale group-hover:grayscale-0">
-                    <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase">A Mentoria Clínica</h3>
-                    <p class="text-text-muted text-lg leading-relaxed">
-                        Além do acesso à biblioteca, você poderá trazer casos reais dos seus clientes. Nós vamos, juntos, debater as melhores tomadas de decisão e condutas para entregar resultados superiores.
-                    </p>
+                    
+                    <!-- Gradient Overlay for Contrast -->
+                    <div class="absolute inset-0 z-0 bg-gradient-to-t from-[#070b10] via-[#070b10]/80 to-transparent"></div>
+
+                    <!-- Content -->
+                    <div class="relative z-10 p-8 lg:p-12 flex flex-col h-full">
+                        <div class="w-16 h-16 bg-accent/20 rounded-xl flex items-center justify-center mb-auto text-accent shadow-glow-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div class="mt-8">
+                            <h3 class="font-heading font-black text-2xl mb-4 text-white uppercase drop-shadow-lg">A Mentoria Clínica</h3>
+                            <p class="text-text-muted text-lg leading-relaxed drop-shadow-md">
+                                Além do acesso à biblioteca, você poderá trazer casos reais dos seus clientes. Nós vamos, juntos, debater as melhores tomadas de decisão e condutas para entregar resultados superiores.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -400,7 +424,7 @@
             <div class="w-full xl:w-[40%] grid grid-cols-2 gap-4 gsap-fade-up">
                 <div class="space-y-4">
                     <img src="cursoposophospitalar.my.canva.site/assets/65a2433238118cd39743fa895ed922_91a99467dcea.jpg" alt="Atendimento" class="w-full h-48 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
-                    <img src="cursoposophospitalar.my.canva.site/assets/87e22a62965f141aa08e93699b0b35_5fcf36561800.jpg" alt="Acompanhamento Atlético" class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <img src="cursoposophospitalar.my.canva.site/assets/cc71942f7bb18414e4c9d3d0bb9c82_a3a70b3e8f08.jpg" alt="Acompanhamento Atlético" class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
                 <div class="space-y-4 mt-8">
                     <img src="cursoposophospitalar.my.canva.site/assets/8a546662621972dd4b0127cbf170c7_22be312b3b70.jpg" alt="Palestra" class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
