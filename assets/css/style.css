@@ -3,7 +3,14 @@ body {
     color: #f2f5f8;
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
+    position: relative;
+    width: 100%;
     -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .font-heading {
@@ -105,6 +112,7 @@ body {
     padding: 6rem 2rem;
     position: relative;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden; /* Prevent background blurs from causing horizontal scroll */
 }
 
 .ds-heading {
