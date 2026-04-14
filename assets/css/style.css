@@ -191,40 +191,75 @@ html {
     }
 }
 
-/* Mobile & Tablet: Always colorful as requested */
+/* Mobile & Tablet Overhaul - "App-Like" Experience */
 @media (max-width: 1024px) {
+    :root {
+        --app-px: 1.25rem;
+        --app-radius: 20px;
+    }
+
     .img-effect {
         filter: none !important;
         -webkit-filter: none !important;
     }
     
-    /* Click/Tap effect for 'App-like' feedback */
     .img-effect:active, .group:active .img-effect {
         transform: scale(1.03);
     }
 
     .ds-section {
-        padding: 3.5rem 1.25rem;
+        padding: 3rem var(--app-px);
+        min-height: auto; /* Allow content to dictate height on mobile */
+    }
+
+    /* Fluid Typography for "App" Look */
+    h1 {
+        font-size: clamp(2rem, 8vw, 2.75rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.04em !important;
     }
 
     .ds-heading {
-        font-size: 1.85rem;
-        margin-bottom: 1.25rem;
+        font-size: clamp(1.5rem, 6vw, 2.25rem);
+        margin-bottom: 1rem;
         line-height: 1.2;
     }
 
-    /* Touch-friendly buttons */
-    .btn-primary, .btn-accent {
-        padding: 1.25rem 2rem;
-        width: 100%;
-        text-align: center;
-        font-size: 1rem;
+    p {
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
-    /* Glass Panels adjustment */
+    /* Native-like Buttons */
+    .btn-primary, .btn-accent {
+        transform: none !important;
+        border-radius: 12px;
+        padding: 1.1rem 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9rem;
+        letter-spacing: 0.02em;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary span {
+        transform: none !important;
+    }
+
+    /* Glass Panels adjustment - More rounded and compact */
     .glass-panel {
+        border-radius: var(--app-radius);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
+        padding: 1.5rem !important;
+    }
+
+    /* Mobile Header Shrink */
+    .fixed.top-0 {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
     }
 }
 
