@@ -24,9 +24,11 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger);
 
+    const isMobile = window.innerWidth < 768;
+
     // Hero animations
     gsap.from(".gsap-hero-content > *", {
-        y: 30,
+        y: isMobile ? 20 : 30,
         opacity: 0,
         duration: 0.8,
         stagger: 0.2,
@@ -35,7 +37,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     gsap.from(".gsap-hero-image", {
-        x: 50,
+        x: isMobile ? 0 : 50,
+        y: isMobile ? 30 : 0,
         opacity: 0,
         duration: 1,
         ease: "power2.out",
@@ -47,9 +50,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         gsap.from(element, {
             scrollTrigger: {
                 trigger: element,
-                start: "top 85%",
+                start: isMobile ? "top 95%" : "top 85%",
             },
-            y: 40,
+            y: isMobile ? 25 : 40,
             opacity: 0,
             duration: 0.8,
             ease: "power2.out"

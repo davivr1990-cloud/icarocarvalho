@@ -11,6 +11,7 @@
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <meta name="theme-color" content="#070b10">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -51,7 +52,7 @@
 
     <!-- 1. Hero Section -->
     <section id="hero"
-        class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 flex items-center min-h-screen overflow-hidden">
+        class="relative pt-24 pb-12 lg:pt-48 lg:pb-32 px-6 flex items-center min-h-screen lg:min-h-0 overflow-hidden">
         <!-- Background Effects -->
         <div
             class="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[150px] -z-10 animate-pulse-slow">
@@ -92,6 +93,7 @@
                         class="glass-panel p-2 rounded-2xl relative z-10 overflow-hidden transform hover:-translate-y-2 transition-transform duration-500">
                         <img src="assets/images/1fcf5d1d1125b35599a205220600ab_71eb87e8f4bc.png"
                             alt="Ícaro Navarro"
+                            fetchpriority="high"
                             class="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-700 object-cover aspect-[4/5] object-top">
                     </div>
                 </div>
@@ -132,6 +134,7 @@
                         <div
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image.png" alt="Atendimento de Elite"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -141,6 +144,7 @@
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image%20copy.png"
                                 alt="Acompanhamento Profissional"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -150,6 +154,7 @@
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image%20copy%203.png"
                                 alt="Referência em Performance"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -159,6 +164,7 @@
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image%20copy%204.png"
                                 alt="Trabalho com Atletas"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -168,6 +174,7 @@
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image%20copy%205.png"
                                 alt="Confiança e Resultados"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -177,6 +184,7 @@
                             class="aspect-[4/5] rounded-2xl overflow-hidden glass-panel p-2 border border-white/5 group hover:border-primary/50 transition-all duration-500">
                             <img src="assets/images/image%20copy%206.png"
                                 alt="Autoridade Clínica"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                         </div>
                     </div>
@@ -210,6 +218,7 @@
                     <div class="absolute inset-0 z-0">
                         <img src="assets/images/0dbda29beec7eecccae2d5decce214_6872e287317f.jpg"
                             alt="Biblioteca Prática"
+                            loading="lazy" decoding="async"
                             class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500">
                     </div>
                     <div class="absolute inset-0 z-0 bg-gradient-to-t from-[#070b10] via-[#070b10]/80 to-transparent">
@@ -240,6 +249,7 @@
                     <div class="absolute inset-0 z-0">
                         <img src="assets/images/251fb6babf89ca5dff34e6e3f16cce_486442cce2eb.jpg"
                             alt="Mentoria Clínica"
+                            loading="lazy" decoding="async"
                             class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500 filter grayscale group-hover:grayscale-0">
                     </div>
                     <div class="absolute inset-0 z-0 bg-gradient-to-t from-[#070b10] via-[#070b10]/80 to-transparent">
@@ -275,6 +285,7 @@
                 <div class="glass-panel p-2 rounded-2xl rounded-tr-[100px] rounded-bl-[100px] overflow-hidden">
                     <img src="assets/images/ca4fd93e79a43d5a13cde1076c022c_2703252e14d7.jpg"
                         alt="Ícaro Navarro - Credibilidade Esportiva"
+                        loading="lazy" decoding="async"
                         class="w-full h-auto aspect-square object-cover rounded-xl rounded-tr-[96px] rounded-bl-[96px] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
                 <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/30 rounded-full blur-[60px] -z-10"></div>
@@ -434,17 +445,21 @@
                 <div class="space-y-4">
                     <img src="assets/images/65a2433238118cd39743fa895ed922_91a99467dcea.jpg"
                         alt="Atendimento"
+                        loading="lazy" decoding="async"
                         class="w-full h-48 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
                     <img src="assets/images/cc71942f7bb18414e4c9d3d0bb9c82_a3a70b3e8f08.jpg"
                         alt="Acompanhamento Atlético"
+                        loading="lazy" decoding="async"
                         class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
                 <div class="space-y-4 mt-8">
                     <img src="assets/images/8a546662621972dd4b0127cbf170c7_22be312b3b70.jpg"
                         alt="Palestra"
+                        loading="lazy" decoding="async"
                         class="w-full h-64 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
                     <img src="assets/images/be47a0c9c0a9f0d9b144ff74296129_694f87608dae.jpg"
                         alt="Clínica"
+                        loading="lazy" decoding="async"
                         class="w-full h-48 object-cover rounded-xl shadow-glass filter grayscale hover:grayscale-0 transition-all duration-500">
                 </div>
             </div>
