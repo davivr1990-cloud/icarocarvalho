@@ -167,29 +167,42 @@ body {
     box-shadow: 0 0 25px rgba(255, 84, 0, 0.8);
 }
 
-/* Responsive & Performance Optimizations */
-@media (max-width: 768px) {
+/* Transition and scale for interactive images */
+.img-effect {
+    transition: filter 0.6s ease, transform 0.4s ease;
+}
+
+/* Desktop: Professional grayscale-to-color transition */
+@media (min-width: 1025px) {
+    .img-effect {
+        filter: grayscale(100%);
+    }
+    .img-effect:hover, .group:hover .img-effect {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+}
+
+/* Mobile & Tablet: Always colorful as requested */
+@media (max-width: 1024px) {
+    .img-effect {
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
+    
+    /* Click/Tap effect for 'App-like' feedback */
+    .img-effect:active, .group:active .img-effect {
+        transform: scale(1.03);
+    }
+
     .ds-section {
-        padding: 3.5rem 1.25rem; /* Reduced vertical spacing for mobile app feel */
+        padding: 3.5rem 1.25rem;
     }
 
     .ds-heading {
         font-size: 1.85rem;
         margin-bottom: 1.25rem;
         line-height: 1.2;
-    }
-
-    /* Grayscale removal on mobile as requested */
-    .grayscale, 
-    [class*="grayscale"],
-    img {
-        filter: none !important;
-        -webkit-filter: none !important;
-    }
-
-    /* Keep the click/tap effect */
-    .group:active img {
-        transform: scale(1.05) !important;
     }
 
     /* Touch-friendly buttons */
@@ -202,7 +215,7 @@ body {
 
     /* Glass Panels adjustment */
     .glass-panel {
-        backdrop-filter: blur(8px); /* Lower blur for performance on mobile */
+        backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }
 }
